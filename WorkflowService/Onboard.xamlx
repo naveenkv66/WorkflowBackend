@@ -1,0 +1,216 @@
+﻿<WorkflowService mc:Ignorable="sap sap2010 sads" p1:TextExpression.Namespaces="{x:Reference __ReferenceID1}" p1:TextExpression.References="{x:Reference __ReferenceID2}" ConfigurationName="Service1" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WorkflowService_1" Name="Service1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
+ xmlns:ac="clr-namespace:ApprovalActivity.CodeActivities;assembly=ApprovalActivity"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:p="http://tempuri.org/"
+ xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:wm="clr-namespace:Workflow.Model;assembly=Workflow.Model"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <p1:Sequence DisplayName="InitiateOnboardProcess" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <p1:TextExpression.Namespaces>
+      <sco:Collection x:TypeArguments="x:String" x:Name="__ReferenceID1">
+        <x:String>System</x:String>
+        <x:String>System.Collections.Generic</x:String>
+        <x:String>System.Data</x:String>
+        <x:String>System.Linq</x:String>
+        <x:String>System.Text</x:String>
+        <x:String>Workflow.Model</x:String>
+        <x:String>System.ServiceModel.Activities</x:String>
+        <x:String>Workflow.Infrastructure.Enums</x:String>
+        <x:String>ApprovalActivity.CodeActivities</x:String>
+      </sco:Collection>
+    </p1:TextExpression.Namespaces>
+    <p1:TextExpression.References>
+      <sco:Collection x:TypeArguments="p1:AssemblyReference" x:Name="__ReferenceID2">
+        <p1:AssemblyReference>Microsoft.CSharp</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.DynamicData</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Drawing</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.Entity</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.ApplicationServices</p1:AssemblyReference>
+        <p1:AssemblyReference>System</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Activities</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Core</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Data</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Data.Entity</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Runtime.Serialization</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel.Activities</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel.Channels</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xaml</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xml</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xml.Linq</p1:AssemblyReference>
+        <p1:AssemblyReference>Workflow.Model</p1:AssemblyReference>
+        <p1:AssemblyReference>ApprovalActivity</p1:AssemblyReference>
+        <p1:AssemblyReference>mscorlib</p1:AssemblyReference>
+        <p1:AssemblyReference>WorkflowService</p1:AssemblyReference>
+        <p1:AssemblyReference>Workflow.Infrastructure</p1:AssemblyReference>
+      </sco:Collection>
+    </p1:TextExpression.References>
+    <p1:Sequence.Variables>
+      <p1:Variable x:TypeArguments="CorrelationHandle" Name="handle" />
+      <p1:Variable x:TypeArguments="x:Int32" Name="data" />
+      <p1:Variable x:TypeArguments="scg:List(wm:Task)" Name="taskList" />
+      <p1:Variable x:TypeArguments="wm:Task" Name="task" />
+    </p1:Sequence.Variables>
+    <Receive x:Name="__ReferenceID0" CanCreateInstance="True" DisplayName="ReceiveRequest" sap2010:WorkflowViewState.IdRef="Receive_1" OperationName="InitiateOnboardRequest" ServiceContractName="p:IService">
+      <Receive.CorrelationInitializers>
+        <RequestReplyCorrelationInitializer>
+          <RequestReplyCorrelationInitializer.CorrelationHandle>
+            <p1:InArgument x:TypeArguments="CorrelationHandle">
+              <mca:CSharpValue x:TypeArguments="CorrelationHandle">handle</mca:CSharpValue>
+            </p1:InArgument>
+          </RequestReplyCorrelationInitializer.CorrelationHandle>
+        </RequestReplyCorrelationInitializer>
+      </Receive.CorrelationInitializers>
+      <ReceiveParametersContent>
+        <p1:OutArgument x:TypeArguments="scg:List(wm:Task)" x:Key="Task">
+          <mca:CSharpReference x:TypeArguments="scg:List(wm:Task)">taskList</mca:CSharpReference>
+        </p1:OutArgument>
+      </ReceiveParametersContent>
+    </Receive>
+    <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendResponse" sap2010:WorkflowViewState.IdRef="SendReply_1">
+      <SendMessageContent>
+        <p1:InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">data.ToString()</mca:CSharpValue>
+        </p1:InArgument>
+      </SendMessageContent>
+    </SendReply>
+    <p1:Sequence DisplayName="Wait For Response" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <p1:Sequence.Variables>
+        <p1:Variable x:TypeArguments="s:Guid" Name="workflowInstanceId">
+          <p1:Variable.Default>
+            <mca:CSharpValue x:TypeArguments="s:Guid">Guid.NewGuid();</mca:CSharpValue>
+          </p1:Variable.Default>
+        </p1:Variable>
+        <p1:Variable x:TypeArguments="x:String" Name="variable2" />
+        <p1:Variable x:TypeArguments="CorrelationHandle" Name="ApprovalCorelationHandle" />
+        <p1:Variable x:TypeArguments="wm:WorkflowConfiguration" Name="WorkflowConfiguration" />
+      </p1:Sequence.Variables>
+      <InitializeCorrelation sap2010:WorkflowViewState.IdRef="InitializeCorrelation_1">
+        <InitializeCorrelation.Correlation>
+          <p1:InArgument x:TypeArguments="CorrelationHandle">
+            <mca:CSharpValue x:TypeArguments="CorrelationHandle">ApprovalCorelationHandle</mca:CSharpValue>
+          </p1:InArgument>
+        </InitializeCorrelation.Correlation>
+        <p1:InArgument x:TypeArguments="x:String" x:Key="WorkflowInstanceId">
+          <mca:CSharpValue x:TypeArguments="x:String">workflowInstanceId.ToString()</mca:CSharpValue>
+        </p1:InArgument>
+      </InitializeCorrelation>
+      <p1:Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+        <p1:Assign.To>
+          <p1:OutArgument x:TypeArguments="wm:Task">
+            <mca:CSharpReference x:TypeArguments="wm:Task">task</mca:CSharpReference>
+          </p1:OutArgument>
+        </p1:Assign.To>
+        <p1:Assign.Value>
+          <p1:InArgument x:TypeArguments="wm:Task">
+            <mca:CSharpValue x:TypeArguments="wm:Task">taskList.FirstOrDefault();</mca:CSharpValue>
+          </p1:InArgument>
+        </p1:Assign.Value>
+      </p1:Assign>
+      <ac:GetWorkflowConfiguration sap2010:WorkflowViewState.IdRef="GetWorkflowConfiguration_1" Text="dummy">
+        <ac:GetWorkflowConfiguration.WorkflowConfiguration>
+          <p1:OutArgument x:TypeArguments="wm:WorkflowConfiguration">
+            <mca:CSharpReference x:TypeArguments="wm:WorkflowConfiguration">WorkflowConfiguration</mca:CSharpReference>
+          </p1:OutArgument>
+        </ac:GetWorkflowConfiguration.WorkflowConfiguration>
+      </ac:GetWorkflowConfiguration>
+      <p1:Sequence DisplayName="ApprovalSection" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <p1:Sequence.Variables>
+          <p1:Variable x:TypeArguments="x:String" Name="variable3" />
+        </p1:Sequence.Variables>
+        <p1:ForEach x:TypeArguments="wm:WorkflowConfigurationDetail" sap2010:WorkflowViewState.IdRef="ForEach`1_3">
+          <p1:ForEach.Values>
+            <p1:InArgument x:TypeArguments="scg:IEnumerable(wm:WorkflowConfigurationDetail)">
+              <mca:CSharpValue x:TypeArguments="scg:IEnumerable(wm:WorkflowConfigurationDetail)">WorkflowConfiguration.WorkflowConfigurationDetails;</mca:CSharpValue>
+            </p1:InArgument>
+          </p1:ForEach.Values>
+          <p1:ActivityAction x:TypeArguments="wm:WorkflowConfigurationDetail">
+            <p1:ActivityAction.Argument>
+              <p1:DelegateInArgument x:TypeArguments="wm:WorkflowConfigurationDetail" Name="item" />
+            </p1:ActivityAction.Argument>
+            <p1:Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <p1:If sap2010:WorkflowViewState.IdRef="If_1">
+                <p1:If.Condition>
+                  <p1:InArgument x:TypeArguments="x:Boolean">
+                    <mca:CSharpValue x:TypeArguments="x:Boolean">item.SequenceNumber==1</mca:CSharpValue>
+                  </p1:InArgument>
+                </p1:If.Condition>
+                <p1:If.Then>
+                  <p1:Sequence DisplayName="FirstLevelApproval" sap2010:WorkflowViewState.IdRef="Sequence_5" />
+                </p1:If.Then>
+              </p1:If>
+            </p1:Sequence>
+          </p1:ActivityAction>
+        </p1:ForEach>
+        <Receive sap2010:WorkflowViewState.IdRef="Receive_2" OperationName="ApproveTask">
+          <Receive.CorrelatesWith>
+            <p1:InArgument x:TypeArguments="CorrelationHandle">
+              <mca:CSharpValue x:TypeArguments="CorrelationHandle">ApprovalCorelationHandle</mca:CSharpValue>
+            </p1:InArgument>
+          </Receive.CorrelatesWith>
+          <ReceiveParametersContent>
+            <p1:OutArgument x:TypeArguments="s:Guid" x:Key="workflowInstanceId" />
+          </ReceiveParametersContent>
+        </Receive>
+      </p1:Sequence>
+    </p1:Sequence>
+    <sads:DebugSymbol.Symbol>d1BDOlxVc2Vyc1xOYXZlZW5rdW1hciBWZW51XHNvdXJjZVxyZXBvc1xXb3JrZmxvd0FwaVxXb3JrZmxvd1NlcnZpY2VcT25ib2FyZC54YW1seBoQA6cBEQEBPwVODwFyTwVVEQFiVgWlARMBAksLS2IBeEQPRFwBc1ILUlgBY1oNWlgBA2EHah8BT2sHdhMBPHcHfSUBMX4HpAEVAQxkDWRsAVloC2hmAVBzDXNkAUZuDW5WAT13ZndtATt6DXp4ATKCAQmZARYBGJoBCaMBEwENhQEPhQGnAQEnjAENlwEbARmdAQ+dAW4BDo0BD5YBFwEakAEVkAFqARuUAROUAXABJg==</sads:DebugSymbol.Symbol>
+  </p1:Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Receive_1" sap:VirtualizedContainerService.HintSize="560,86" />
+      <sap2010:ViewStateData Id="SendReply_1" sap:VirtualizedContainerService.HintSize="560,86" />
+      <sap2010:ViewStateData Id="InitializeCorrelation_1" sap:VirtualizedContainerService.HintSize="538,97" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="538,62" />
+      <sap2010:ViewStateData Id="GetWorkflowConfiguration_1" sap:VirtualizedContainerService.HintSize="538,22" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="200,99">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,249" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="486,373">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_3" sap:VirtualizedContainerService.HintSize="516,523" />
+      <sap2010:ViewStateData Id="Receive_2" sap:VirtualizedContainerService.HintSize="516,86" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="538,773">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="560,1198">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="582,1574">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WorkflowService_1" sap:VirtualizedContainerService.HintSize="612,1644" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</WorkflowService>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Workflow.Common\Workflow.Common.csproj" />
+    <ProjectReference Include="..\Workflow.Model\Workflow.Model.csproj" />
+    <ProjectReference Include="..\Workflow.Repository\Workflow.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
